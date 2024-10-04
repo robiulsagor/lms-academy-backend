@@ -3,16 +3,20 @@ const cors = require("cors")
 const connectDB = require('./config/connectDB')
 require("dotenv").config()
 
+const authRoute = require('./routes/auth-route')
+
 const app = express()
 connectDB()
 
 app.use(express.json())
-
 app.use(cors({
-    origin: ["http://localhost:5137"],
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "Accept"]
+    allowedHeaders: ["Content-Type", "Authorization"]
 }))
+
+// routes
+app.use("/api/auth", authRoute)
 
 app.get("/test", (req, res) => {
     res.json({ success: true, message: "Hello, World!" })
