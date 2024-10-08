@@ -41,7 +41,7 @@ const loginUser = async (req, res) => {
             username: checkUser.username,
             email: checkUser.email,
             role: checkUser.role
-        }, process.env.TOKEN_SECRET, { expiresIn: '2m' })
+        }, process.env.TOKEN_SECRET, { expiresIn: '20m' })
 
         res.cookie("token", token, {
             httpOnly: true,
@@ -63,4 +63,15 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser }
+const logout = async (req, res) => {
+    try {
+        res.clearCookie("token").json({
+            success: true,
+            message: "Logged out!"
+        })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+module.exports = { registerUser, loginUser, logout }

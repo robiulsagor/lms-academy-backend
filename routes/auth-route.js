@@ -1,5 +1,5 @@
 const express = require("express")
-const { loginUser, registerUser } = require("../controllers/auth-controller")
+const { loginUser, registerUser, logout } = require("../controllers/auth-controller")
 const authenticate = require("../middlewares/auth-middleware")
 const router = express()
 
@@ -13,6 +13,7 @@ router.get('/check-auth', authenticate, (req, res) => {
         data: { user }
     })
 })
+router.get('/logout', logout)
 
 // the next 2 endpoints are just for test purpose
 router.post('/set', (req, res) => {
