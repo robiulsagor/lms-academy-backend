@@ -5,6 +5,7 @@ const connectDB = require('./config/connectDB')
 require("dotenv").config()
 
 const authRoute = require('./routes/auth-route')
+const mediaRoutes = require('./routes/instructor-route/media-routes')
 
 const app = express()
 connectDB()
@@ -20,6 +21,8 @@ app.use(cors({
 
 // routes
 app.use("/api/auth", authRoute)
+app.use("/api/media", mediaRoutes)
+
 
 app.use("/api/cookie", authRoute)
 // just testing purpose for cookies, and will remove it soon

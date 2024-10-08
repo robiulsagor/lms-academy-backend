@@ -41,7 +41,7 @@ const loginUser = async (req, res) => {
             username: checkUser.username,
             email: checkUser.email,
             role: checkUser.role
-        }, process.env.TOKEN_SECRET, { expiresIn: '20m' })
+        }, process.env.TOKEN_SECRET, { expiresIn: '120m' })
 
         res.cookie("token", token, {
             httpOnly: true,
